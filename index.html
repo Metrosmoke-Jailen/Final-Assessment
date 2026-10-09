@@ -1,0 +1,63 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Final Assessment</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="container">
+    <h1>Final Assessment</h1>
+    <div class="editor">
+      <form aria-label="Image filter controls">
+        
+		<label for="hue"><span>Hue Rotate</span>
+          <input id="hue" type="range" min="0" max="360" value="0">
+          <output id="hue-value" for="hue">0°</output>
+        </label>
+        
+		<label for="blur"><span>Blur</span>
+          <input id="blur" type="range" min="0" max="40" value="0">
+          <output id="blur-value" for="blur">0px</output>
+        </label>
+        
+		<label for="contrast"><span>Contrast</span>
+          <input id="contrast" type="range" min="0" max="400" value="50">
+          <output id="contrast-value" for="contrast">50%</output>
+        </label>
+        
+		<label for="saturation"><span>Saturation</span>
+          <input id="saturation" type="range" min="0" max="200" value="100">
+          <output id="saturation-value" for="saturation">100%</output>
+        </label>
+      
+	</form>
+      <img src="./dali.png" alt="Salvador Dalí portrait edited with image filters" width="400" height="400">
+    </div>
+  </main>
+
+  <script>
+    const img = document.querySelector('img');
+    const sliders = document.querySelectorAll('input[type="range"]');
+
+    function updateFilters() {
+      const hue = +document.querySelector('#hue').value;
+      const blur = +document.querySelector('#blur').value;
+      const contrast = +document.querySelector('#contrast').value;
+      const saturation = +document.querySelector('#saturation').value;
+
+      img.style.filter = `saturate(${saturation}%) contrast(${contrast}%) hue-rotate(${hue}deg) blur(${blur}px)`;
+
+      document.querySelector('#hue-value').textContent = `${hue}°`;
+      document.querySelector('#blur-value').textContent = `${blur}px`;
+      document.querySelector('#contrast-value').textContent = `${contrast}%`;
+      document.querySelector('#saturation-value').textContent = `${saturation}%`;
+    }
+
+    sliders.forEach(slider => slider.addEventListener('input', updateFilters));
+    updateFilters();
+  </script>
+</body>
+</html>
